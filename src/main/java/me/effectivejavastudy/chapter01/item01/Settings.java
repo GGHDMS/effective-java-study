@@ -19,13 +19,14 @@ public class Settings {
 
     private static final Settings SETTINGS = new Settings();
 
+    // 호출될 때마다 인스턴트를 새로 생성하지 않아도 된다.
     public static Settings getInstance() {
         return SETTINGS;
     }
 
     public static void main(String[] args) {
-        ArrayList<String> list = new ArrayList<>();
-        List.of("keesun", "hsm");
+        ArrayList<String> list = new ArrayList<>(); // 생성자
+        List.of("keesun", "hsm"); // 정적 메소드
     }
 
 
