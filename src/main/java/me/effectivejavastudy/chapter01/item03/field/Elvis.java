@@ -1,7 +1,9 @@
 package me.effectivejavastudy.chapter01.item03.field;
 
+import java.io.Serializable;
+
 // 코드 3-1 public static final 필드 방식의 싱글턴 (23쪽)
-public class Elvis implements IElvis {
+public class Elvis implements IElvis, Serializable {
 
     /**
      * 싱글톤 오브젝트
@@ -10,6 +12,11 @@ public class Elvis implements IElvis {
     private static boolean created;
 
     private Elvis() {
+        if (created) {
+            throw new UnsupportedOperationException("can't be create by constructor");
+        }
+
+        created = true;
     }
 
     public void leaveTheBuilding() {
@@ -24,6 +31,10 @@ public class Elvis implements IElvis {
     public static void main(String[] args) {
         Elvis elvis = Elvis.INSTANCE;
         elvis.leaveTheBuilding();
+    }
+
+    private Object readResolve() {
+        return INSTANCE;
     }
 
 }
